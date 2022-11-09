@@ -8,7 +8,6 @@ def lambda_handler(event, context):
   s3 = boto3.client('s3')
   csv_obj = s3.get_object(Bucket=bucket_name, Key=file_name)
   csv_obj_data = csv_obj['Body'].read().decode('utf-8').splitlines()
-  print(csv_obj_data)
   
   data = {}
   csvReader = csv.DictReader(csv_obj_data)
@@ -17,7 +16,6 @@ def lambda_handler(event, context):
     key = rows['id']
     data[key] = rows
 
-  print("AAAAA")
 # Convert dict to list
   dictlist = []
   for __, value in data.items():
